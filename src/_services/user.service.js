@@ -1,4 +1,3 @@
-import config from 'config';
 import { authHeader } from '../_helpers';
 
 export const userService = {
@@ -18,7 +17,10 @@ function login(username, password) {
     body: JSON.stringify({ username, password }),
   };
 
-  return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+  return fetch(
+    `${process.env.REACT_APP_APIURL}/users/authenticate`,
+    requestOptions
+  )
     .then(handleResponse)
     .then((user) => {
       localStorage.setItem('user', JSON.stringify(user));
@@ -37,7 +39,9 @@ function getAll() {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+  return fetch(`${process.env.REACT_APP_APIURL}/users`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function getById(id) {
@@ -46,9 +50,10 @@ function getById(id) {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(
+    `${process.env.REACT_APP_APIURL}/users/${id}`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function register(user) {
@@ -58,9 +63,10 @@ function register(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`${config.apiUrl}/users/register`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(
+    `${process.env.REACT_APP_APIURL}/users/register`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function update(user) {
@@ -70,9 +76,10 @@ function update(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(
+    `${process.env.REACT_APP_APIURL}/users/${user.id}`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function _delete(id) {
@@ -81,9 +88,10 @@ function _delete(id) {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(
+    `${process.env.REACT_APP_APIURL}/users/${id}`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function handleResponse(response) {
